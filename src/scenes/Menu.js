@@ -31,7 +31,7 @@ class Menu extends Phaser.Scene {
         // menuConfig.color = '#000';
         // this.add.text(game.config.width/2, game.config.height/2 + borderUIsize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
         this.cover = this.add.tileSprite(0, 0, 640, 480, 'cover').setOrigin(0, 0); 
-        let startmusic = this.sound.add('start', { volume: 0.35});
+        let startmusic = this.sound.add('start', { volume: 0.3});
         startmusic.play();
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -48,7 +48,6 @@ class Menu extends Phaser.Scene {
           startmusic.play();
           this.sound.play('sfx-select');
           this.scene.start("playScene");
-          this.sound.stopByKey('start');
         }
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
           game.settings = {
@@ -61,7 +60,6 @@ class Menu extends Phaser.Scene {
           startmusic.play();
           this.sound.play('sfx-select');
           this.scene.start("playScene");
-          this.sound.stopByKey('start');
         }
       }
 }
