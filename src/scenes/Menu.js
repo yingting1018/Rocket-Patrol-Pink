@@ -7,6 +7,7 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx-select', './assets/Rocket Patrol/sfx-select.wav');
         this.load.audio('sfx-explosion', './assets/Rocket Patrol/sfx-explosion.wav');
         this.load.audio('sfx-shot', './assets/Rocket Patrol/sfx-shot.wav');
+        this.load.audio('start', './assets/Rocket Patrol/start.wav');
         this.load.image('cover', './assets/Rocket Patrol/cover.png')
     }
 
@@ -29,7 +30,9 @@ class Menu extends Phaser.Scene {
         // menuConfig.backgroundColor = '#00FF00';
         // menuConfig.color = '#000';
         // this.add.text(game.config.width/2, game.config.height/2 + borderUIsize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
-        this.cover = this.add.tileSprite(0, 0, 640, 480, 'cover').setOrigin(0, 0);
+        this.cover = this.add.tileSprite(0, 0, 640, 480, 'cover').setOrigin(0, 0); 
+        let startmusic = this.sound.add('start', { volume: 0.35});
+        startmusic.play();
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
@@ -42,16 +45,21 @@ class Menu extends Phaser.Scene {
             gameTimer: 60000    
           }
           this.sound.play('sfx-select');
-          this.scene.start("playScene");    
+          this.scene.start("playScene");
+          this.sound.stopByKey('start');
         }
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
           game.settings = {
             spaceshipSpeed: 4,
             pinkSpeed: 6,
             gameTimer: 45000    
+            
           }
           this.sound.play('sfx-select');
-          this.scene.start("playScene");    
+          this.scene.start("playScene");
+          this.sound.stopByKey('start');
+          console.log("speed:")
+          console.log(game.settings.spaceshipSpeed)
         }
       }
 }

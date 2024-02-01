@@ -18,13 +18,13 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('rocket', './assets/Rocket Patrol/rocket.png');
         this.load.image('spaceship', './assets/Rocket Patrol/spaceship.png');
-        this.load.image('starfield', './assets/Rocket Patrol/starfield.png');
+        this.load.image('sprite', './assets/Rocket Patrol/sprite.png');
         this.load.image('pink', './assets/Rocket Patrol/pink.png');
         this.load.spritesheet('explosion', './assets/Rocket Patrol/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
 
     create() {
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+        this.sprite = this.add.tileSprite(0, 0, 640, 480, 'sprite').setOrigin(0, 0);
         // this.add.rectangle(0, borderUIsize + borderPadding, game.config.width, borderUIsize * 2, 0x00FF00).setOrigin(0, 0);
         // this.add.rectangle(0, 0, game.config.width, borderUIsize, 0xFFFFFF).setOrigin(0 ,0);
         // this.add.rectangle(0, game.config.height - borderUIsize, game.config.width, borderUIsize, 0xFFFFFF).setOrigin(0 ,0);
@@ -96,23 +96,36 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
+            this.scene.restart();
+        }
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.scene.start("menuScene");
+        }
         if (game.settings.gameTimer > 0)
         {
-            console.log(game.settings.gameTimer)
           game.settings.gameTimer -= 10;
         } else if (game.settings.gameTimer <= 0) {
             this.gameOver = true;
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', this.scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← to Menu', this.scoreConfig).setOrigin(0.5);
         }
+        // this.elapsedTime += this.time.deltaMS;
+        // if (this.elapsedTime > 50000)
+        // {
+        //     this.ship01.setSpeed(game.settings.spaceshipSpeed + 1);
+        //     this.ship02.setSpeed(game.settings.spaceshipSpeed + 1);
+        //     this.ship03.setSpeed(game.settings.spaceshipSpeed + 1);
+        // }
+        // if (game.settings.gameTimer < 30000)
+        // {
+        //     game.settings.spaceshipSpeed ;
+        //     console.log("speed:")
+        //     console.log(game.settings.spaceshipSpeed)
+        //     game.settings.pinkSpeed ; 
+        // }
         this.timeLeft.setText(Math.floor(game.settings.gameTimer / 1000));
-        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
-            this.scene.restart();
-        }
 
-        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            this.scene.start("menuScene");
-        }
         if(this.p1Rocket.isFiring)
         {
             this.FireCenter.setVisible(false);
@@ -122,7 +135,7 @@ class Play extends Phaser.Scene {
             this.FireCenter.setVisible(true);
         }
 
-        this.starfield.tilePositionX -= 4;  
+        this.sprite.tilePositionX -= 4;  
 
         if(!this.gameOver) {
             this.p1Rocket.update();            
