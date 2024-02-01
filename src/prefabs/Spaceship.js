@@ -20,7 +20,7 @@ class Spaceship extends Phaser.GameObjects.Sprite
         onTimerTick() {
           this.elapsedTime += this.timerEvent.getElapsed();
           // Increase moveSpeed after 30 seconds (30000 milliseconds)
-          if (this.elapsedTime >= 5000 && this.moveSpeed !== 10) {
+          if (this.elapsedTime >= 30000 && this.moveSpeed !== 10) {
             this.moveSpeed = 12;
       
             // Stop the timer event from repeating
@@ -66,7 +66,7 @@ class Pink extends Phaser.GameObjects.Sprite
         onTimerTick() {
           this.elapsedTime += this.timerEvent.getElapsed();
           // Increase moveSpeed after 30 seconds (30000 milliseconds)
-          if (this.elapsedTime >= 5000 && this.moveSpeed !== 10) {
+          if (this.elapsedTime >= 30000 && this.moveSpeed !== 10) {
             this.moveSpeed = 15;
       
             // Stop the timer event from repeating

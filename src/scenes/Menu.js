@@ -44,6 +44,8 @@ class Menu extends Phaser.Scene {
             pinkSpeed: 5,
             gameTimer: 60000    
           }
+          let startmusic = this.sound.add('start', { volume: 0.2});
+          startmusic.play();
           this.sound.play('sfx-select');
           this.scene.start("playScene");
           this.sound.stopByKey('start');
@@ -55,6 +57,8 @@ class Menu extends Phaser.Scene {
             gameTimer: 45000  
             
           }
+          let startmusic = this.sound.add('start', { volume: 0.2});
+          startmusic.play();
           this.sound.play('sfx-select');
           this.scene.start("playScene");
           this.sound.stopByKey('start');
