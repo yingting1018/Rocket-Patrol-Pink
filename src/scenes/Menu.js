@@ -52,14 +52,12 @@ class Menu extends Phaser.Scene {
           game.settings = {
             spaceshipSpeed: 4,
             pinkSpeed: 6,
-            gameTimer: 45000    
+            gameTimer: 45000  
             
           }
           this.sound.play('sfx-select');
           this.scene.start("playScene");
           this.sound.stopByKey('start');
-          console.log("speed:")
-          console.log(game.settings.spaceshipSpeed)
         }
       }
 }

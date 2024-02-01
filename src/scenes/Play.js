@@ -110,13 +110,6 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', this.scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← to Menu', this.scoreConfig).setOrigin(0.5);
         }
-        // this.elapsedTime += this.time.deltaMS;
-        // if (this.elapsedTime > 50000)
-        // {
-        //     this.ship01.setSpeed(game.settings.spaceshipSpeed + 1);
-        //     this.ship02.setSpeed(game.settings.spaceshipSpeed + 1);
-        //     this.ship03.setSpeed(game.settings.spaceshipSpeed + 1);
-        // }
         // if (game.settings.gameTimer < 30000)
         // {
         //     game.settings.spaceshipSpeed ;
@@ -208,6 +201,25 @@ class Play extends Phaser.Scene {
                 return true;
         } else {
             return false;
+        }this.timerEvent = scene.time.addEvent({
+            delay: 1000, // 1 second
+            callback: this.onTimerTick,
+            callbackScope: this,
+            loop: true,
+          });
+      
+          this.elapsedTime = 0;
+        }
+      
+        onTimerTick() {
+          this.elapsedTime += this.timerEvent.getElapsed();
+          // Increase moveSpeed after 30 seconds (30000 milliseconds)
+          if (this.elapsedTime >= 5000 && this.moveSpeed !== 10) {
+            this.moveSpeed = 13;
+      
+            // Stop the timer event from repeating
+            this.timerEvent.remove(false);
+          }
         }
     }
 
