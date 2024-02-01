@@ -33,6 +33,7 @@ class Menu extends Phaser.Scene {
         this.cover = this.add.tileSprite(0, 0, 640, 480, 'cover').setOrigin(0, 0); 
         let startmusic = this.sound.add('start', { volume: 0.3});
         startmusic.play();
+        startmusic.setLoop(true);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
@@ -47,6 +48,7 @@ class Menu extends Phaser.Scene {
           this.sound.stopByKey('start');
           let startmusic = this.sound.add('start', { volume: 0.2});
           startmusic.play();
+          startmusic.setLoop(true);
           this.sound.play('sfx-select');
           this.scene.start("playScene");
         }
@@ -60,6 +62,7 @@ class Menu extends Phaser.Scene {
           this.sound.stopByKey('start');
           let startmusic = this.sound.add('start', { volume: 0.2});
           startmusic.play();
+          startmusic.setLoop(true);
           this.sound.play('sfx-select');
           this.scene.start("playScene");
 
