@@ -25,11 +25,6 @@ class Play extends Phaser.Scene {
 
     create() {
         this.sprite = this.add.tileSprite(0, 0, 640, 480, 'sprite').setOrigin(0, 0);
-        // this.add.rectangle(0, borderUIsize + borderPadding, game.config.width, borderUIsize * 2, 0x00FF00).setOrigin(0, 0);
-        // this.add.rectangle(0, 0, game.config.width, borderUIsize, 0xFFFFFF).setOrigin(0 ,0);
-        // this.add.rectangle(0, game.config.height - borderUIsize, game.config.width, borderUIsize, 0xFFFFFF).setOrigin(0 ,0);
-        // this.add.rectangle(0, 0, borderUIsize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        // this.add.rectangle(game.config.width - borderUIsize, 0, borderUIsize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUIsize - borderPadding, 'rocket').setOrigin(0.5, 0);
         this.ship01 = new Spaceship(this, game.config.width + borderUIsize*6, borderUIsize*4, 'spaceship', 0, 10).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUIsize*3, borderUIsize*5 + borderPadding*2, 'spaceship', 0, 10).setOrigin(0,0);
@@ -110,13 +105,6 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', this.scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← to Menu', this.scoreConfig).setOrigin(0.5);
         }
-        // if (game.settings.gameTimer < 30000)
-        // {
-        //     game.settings.spaceshipSpeed ;
-        //     console.log("speed:")
-        //     console.log(game.settings.spaceshipSpeed)
-        //     game.settings.pinkSpeed ; 
-        // }
         this.timeLeft.setText(Math.floor(game.settings.gameTimer / 1000));
 
         if(this.p1Rocket.isFiring)
@@ -170,27 +158,10 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship06);
             game.settings.gameTimer += 5000;
         }
-        // if (this.shipExplode && this.checkCollision)
-        // {
-        //     game.settings.gameTimer += 200;
-        //     this.timeLeft.setText(Math.floor(game.settings.gameTimer / 1000));
-        //     console.log("ship hit")
-        // }
-
         if(this.p1Rocket.y - 2 <= borderUIsize * 3 + borderPadding)
         {
             game.settings.gameTimer -= 10000;
         }
-        // if(game.settings.gameTimer <= 0)
-        // {
-            
-        // }
-        // if (this.p1Rocket.shipExplode)
-        // {
-        //     game.settings.gameTimer += 200;
-        //     this.timeLeft.setText(Math.floor(game.settings.gameTimer / 1000));
-        // }
-
     }
 
     checkCollision(rocket, ship) {
@@ -201,25 +172,6 @@ class Play extends Phaser.Scene {
                 return true;
         } else {
             return false;
-        }this.timerEvent = scene.time.addEvent({
-            delay: 1000, // 1 second
-            callback: this.onTimerTick,
-            callbackScope: this,
-            loop: true,
-          });
-      
-          this.elapsedTime = 0;
-        }
-      
-        onTimerTick() {
-          this.elapsedTime += this.timerEvent.getElapsed();
-          // Increase moveSpeed after 30 seconds (30000 milliseconds)
-          if (this.elapsedTime >= 5000 && this.moveSpeed !== 10) {
-            this.moveSpeed = 13;
-      
-            // Stop the timer event from repeating
-            this.timerEvent.remove(false);
-          }
         }
     }
 
@@ -234,18 +186,6 @@ class Play extends Phaser.Scene {
         });
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-
-        // this.p2Score += ship.points + 20;
-        // this.scoreLeft.text = this.p2Score; 
-        // this.p2Score += ship.points;
-        // if(this.checkCollision(this.ship01, this.ship02, this.ship03));
-        // {
-        //     this.scoreLeft.text = this.p1Score; 
-        // }
-        // if(this.checkCollision(this.ship04, this.ship05, this.ship06)){
-        //     this.scoreLeft.text = this.p1Score + 20;
-        // }
-        
         this.sound.play('sfx-explosion');
       }
 
